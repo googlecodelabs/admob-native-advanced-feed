@@ -89,6 +89,11 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(view);
             NativeAppInstallAdView adView = (NativeAppInstallAdView) view;
 
+            // The MediaView will display a video asset if one is present in the ad, and the
+            // first image asset otherwise.
+            MediaView mediaView = (MediaView) adView.findViewById(R.id.appinstall_media);
+            adView.setMediaView(mediaView);
+
             // Register the view used for each individual asset.
             adView.setHeadlineView(adView.findViewById(R.id.appinstall_headline));
             adView.setBodyView(adView.findViewById(R.id.appinstall_body));
@@ -199,11 +204,6 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private void populateAppInstallAdView(NativeAppInstallAd nativeAppInstallAd,
                                           NativeAppInstallAdView adView) {
-        // The MediaView will display a video asset if one is present in the ad, and the first image
-        // asset otherwise.
-        MediaView mediaView = (MediaView) adView.findViewById(R.id.appinstall_media);
-        adView.setMediaView(mediaView);
-
         // Some assets are guaranteed to be in every NativeAppInstallAd.
         ((TextView) adView.getHeadlineView()).setText(nativeAppInstallAd.getHeadline());
         ((TextView) adView.getBodyView()).setText(nativeAppInstallAd.getBody());

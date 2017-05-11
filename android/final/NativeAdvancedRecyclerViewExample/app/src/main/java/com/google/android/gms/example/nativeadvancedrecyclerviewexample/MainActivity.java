@@ -46,8 +46,8 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity {
 
-    // A native ad is placed in every nth position in the RecyclerView.
-    public static final int ITEMS_PER_AD = 8;
+    // The number of native ads to load.
+    public static final int NUMBER_OF_ADS = 5;
 
     // The native ad unit ID.
     private static final String ADMOB_AD_UNIT_ID = "ca-app-pub-3940256099942544/8135179316";
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             // Update the RecyclerView item's list with menu items.
             addMenuItemsFromJson();
             // Update the RecyclerView item's list with native ads.
-            loadNativeAd(0);
+            loadNativeAd();
         }
     }
 
@@ -84,22 +84,24 @@ public class MainActivity extends AppCompatActivity {
         return mRecyclerViewItems;
     }
 
-    private void insertAdsInMenuItems(){
+    private void insertAdsInMenuItems() {
+        int offset = (mRecyclerViewItems.size() / mNativeAds.size()) + 1;
         int index = 0;
-        for(NativeAd ad: mNativeAds) {
+        for (NativeAd ad : mNativeAds) {
             mRecyclerViewItems.add(index, ad);
-            index = index + (mRecyclerViewItems.size() / mNativeAds.size());
+            index = index + offset;
         }
-        loadMenu();
     }
 
-    /**
-     * Loads the native ads in the items list.
-     */
+    private void loadNativeAd() {
+        loadNativeAd(0);
+    }
+
     private void loadNativeAd(final int adLoadCount) {
 
-        if (adLoadCount >= mRecyclerViewItems.size() / ITEMS_PER_AD) {
+        if (adLoadCount >= NUMBER_OF_ADS) {
             insertAdsInMenuItems();
+            loadMenu();
             return;
         }
 
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAppInstallAdLoaded(NativeAppInstallAd ad) {
                 // An app install ad loaded successfully, call this method again to
-                // load the next ad in the items list.
+                // load the next ad.
                 mNativeAds.add(ad);
                 loadNativeAd(adLoadCount + 1);
 
@@ -117,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onContentAdLoaded(NativeContentAd ad) {
                 // A content ad loaded successfully, call this method again to
-                // load the next ad in the items list.
+                // load the next ad.
                 mNativeAds.add(ad);
                 loadNativeAd(adLoadCount + 1);
             }
