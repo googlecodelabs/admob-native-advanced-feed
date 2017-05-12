@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.android.gms.ads.formats.MediaView;
 import com.google.android.gms.ads.formats.NativeAd;
 import com.google.android.gms.ads.formats.NativeAppInstallAd;
@@ -55,7 +54,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     /**
      * For this example app, the recyclerViewItems list contains only
-     * {@link MenuItem} and {@link NativeExpressAdView} types.
+     * {@link MenuItem} and {@link NativeAd} types.
      */
     public RecyclerViewAdapter(Context context, List<Object> recyclerViewItems) {
         this.mContext = context;
