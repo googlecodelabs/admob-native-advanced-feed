@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.formats.MediaView;
 import com.google.android.gms.ads.formats.NativeAd;
 import com.google.android.gms.ads.formats.NativeAppInstallAd;
 import com.google.android.gms.ads.formats.NativeAppInstallAdView;
@@ -79,42 +78,6 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             menuItemPrice = (TextView) view.findViewById(R.id.menu_item_price);
             menuItemCategory = (TextView) view.findViewById(R.id.menu_item_category);
             menuItemDescription = (TextView) view.findViewById(R.id.menu_item_description);
-        }
-    }
-
-    public class NativeAppInstallAdViewHolder extends RecyclerView.ViewHolder {
-        NativeAppInstallAdViewHolder(View view) {
-            super(view);
-            NativeAppInstallAdView adView = (NativeAppInstallAdView) view;
-
-            // The MediaView will display a video asset if one is present in the ad, and the
-            // first image asset otherwise.
-            MediaView mediaView = (MediaView) adView.findViewById(R.id.appinstall_media);
-            adView.setMediaView(mediaView);
-
-            // Register the view used for each individual asset.
-            adView.setHeadlineView(adView.findViewById(R.id.appinstall_headline));
-            adView.setBodyView(adView.findViewById(R.id.appinstall_body));
-            adView.setCallToActionView(adView.findViewById(R.id.appinstall_call_to_action));
-            adView.setIconView(adView.findViewById(R.id.appinstall_app_icon));
-            adView.setPriceView(adView.findViewById(R.id.appinstall_price));
-            adView.setStarRatingView(adView.findViewById(R.id.appinstall_stars));
-            adView.setStoreView(adView.findViewById(R.id.appinstall_store));
-        }
-    }
-
-    public class NativeContentAdViewHolder extends RecyclerView.ViewHolder {
-        NativeContentAdViewHolder(View view) {
-            super(view);
-            NativeContentAdView adView = (NativeContentAdView) view;
-
-            // Register the view used for each individual asset.
-            adView.setHeadlineView(adView.findViewById(R.id.contentad_headline));
-            adView.setImageView(adView.findViewById(R.id.contentad_image));
-            adView.setBodyView(adView.findViewById(R.id.contentad_body));
-            adView.setCallToActionView(adView.findViewById(R.id.contentad_call_to_action));
-            adView.setLogoView(adView.findViewById(R.id.contentad_logo));
-            adView.setAdvertiserView(adView.findViewById(R.id.contentad_advertiser));
         }
     }
 
