@@ -25,6 +25,7 @@ import android.util.Log;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.formats.NativeAd;
 import com.google.android.gms.ads.formats.NativeAppInstallAd;
 import com.google.android.gms.ads.formats.NativeContentAd;
@@ -49,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
     // The number of native ads to load.
     public static final int NUMBER_OF_ADS = 5;
 
-    // The native ad unit ID.
-    private static final String ADMOB_AD_UNIT_ID = "ca-app-pub-3940256099942544/8135179316";
-
     // List of MenuItems and native ads that populate the RecyclerView.
     private List<Object> mRecyclerViewItems = new ArrayList<>();
 
@@ -62,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize the Mobile Ads SDK.
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
 
         if (savedInstanceState == null) {
             // Create new fragment to display a progress spinner while the data set for the
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        AdLoader.Builder builder = new AdLoader.Builder(this, ADMOB_AD_UNIT_ID);
+        AdLoader.Builder builder = new AdLoader.Builder(this, getString(R.string.ad_unit_id));
         AdLoader adLoader = builder.forAppInstallAd(new NativeAppInstallAd.OnAppInstallAdLoadedListener() {
             @Override
             public void onAppInstallAdLoaded(NativeAppInstallAd ad) {
