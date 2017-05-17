@@ -166,6 +166,8 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private void populateAppInstallAdView(NativeAppInstallAd nativeAppInstallAd,
                                           NativeAppInstallAdView adView) {
         // Some assets are guaranteed to be in every NativeAppInstallAd.
+        ((ImageView) adView.getIconView()).setImageDrawable(nativeAppInstallAd.getIcon()
+                .getDrawable());
         ((TextView) adView.getHeadlineView()).setText(nativeAppInstallAd.getHeadline());
         ((TextView) adView.getBodyView()).setText(nativeAppInstallAd.getBody());
         ((Button) adView.getCallToActionView()).setText(nativeAppInstallAd.getCallToAction());
