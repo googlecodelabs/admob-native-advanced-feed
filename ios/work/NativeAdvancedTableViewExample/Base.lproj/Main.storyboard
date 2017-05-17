@@ -28,7 +28,7 @@
                                     <action selector="showMenu:" destination="Paz-5N-vym" eventType="touchUpInside" id="Uie-dx-7Ur"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WTB-f3-Ovf">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WTB-f3-Ovf">
                                 <rect key="frame" x="177" y="277" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Restaurant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNR-2K-qZA">
@@ -41,6 +41,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Tbh-P3-DpX" firstAttribute="centerY" secondItem="993-33-RpA" secondAttribute="centerY" id="9DM-at-uQG"/>
+                            <constraint firstItem="WTB-f3-Ovf" firstAttribute="centerX" secondItem="993-33-RpA" secondAttribute="centerX" id="9dd-xC-iCA"/>
                             <constraint firstItem="Tbh-P3-DpX" firstAttribute="top" secondItem="WTB-f3-Ovf" secondAttribute="bottom" constant="20" id="QCV-wX-9Mf"/>
                             <constraint firstItem="Tbh-P3-DpX" firstAttribute="centerX" secondItem="993-33-RpA" secondAttribute="centerX" id="Rrv-hB-pQ6"/>
                             <constraint firstItem="jNR-2K-qZA" firstAttribute="top" secondItem="eh1-Nd-0m4" secondAttribute="bottom" constant="100" id="Yle-mq-jEy"/>
