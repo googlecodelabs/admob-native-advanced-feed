@@ -86,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void insertAdsInMenuItems() {
+        if (mNativeAds.size() <= 0) {
+            return;
+        }
+
         int offset = (mRecyclerViewItems.size() / mNativeAds.size()) + 1;
         int index = 0;
         for (NativeAd ad : mNativeAds) {
