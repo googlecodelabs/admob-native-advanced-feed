@@ -118,6 +118,10 @@ class ViewController: UIViewController, GADNativeAppInstallAdLoaderDelegate,
 
   /// Add native ads to the tableViewItems list.
   func addNativeAds() {
+    if nativeAds.count <= 0 {
+      return
+    }
+
     let adInterval = (tableViewItems.count / nativeAds.count) + 1
     var index = 0
     for nativeAd in nativeAds {
