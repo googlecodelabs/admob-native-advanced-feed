@@ -17,8 +17,7 @@
 		846A6C781D73972000270B27 /* menu_item_image-web.png in Resources */ = {isa = PBXBuildFile; fileRef = 846A6C771D73972000270B27 /* menu_item_image-web.png */; };
 		846A6C821D760EC000270B27 /* MenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A6C811D760EC000270B27 /* MenuItem.xib */; };
 		84B6D3661D99A5D5007D12D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84B6D3651D99A5D5007D12D2 /* GoogleService-Info.plist */; };
-		CFE63B351EAA7FC500C90BF8 /* NativeAppInstallAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFE63B331EAA7FC500C90BF8 /* NativeAppInstallAdCell.xib */; };
-		CFE63B361EAA7FC500C90BF8 /* NativeContentAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFE63B341EAA7FC500C90BF8 /* NativeContentAdCell.xib */; };
+		AE1BCE991FDF1D9200576336 /* UnifiedNativeAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1BCE981FDF1D9200576336 /* UnifiedNativeAdCell.xib */; };
 		CFE63B381EAA811300C90BF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE63B371EAA811300C90BF8 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,8 +34,7 @@
 		846A6C771D73972000270B27 /* menu_item_image-web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu_item_image-web.png"; path = "../NativeAdvancedTableViewExample/menu_item_image-web.png"; sourceTree = "<group>"; };
 		846A6C811D760EC000270B27 /* MenuItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuItem.xib; path = ../NativeAdvancedTableViewExample/MenuItem.xib; sourceTree = "<group>"; };
 		84B6D3651D99A5D5007D12D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../NativeAdvancedTableViewExample/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CFE63B331EAA7FC500C90BF8 /* NativeAppInstallAdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAppInstallAdCell.xib; sourceTree = "<group>"; };
-		CFE63B341EAA7FC500C90BF8 /* NativeContentAdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeContentAdCell.xib; sourceTree = "<group>"; };
+		AE1BCE981FDF1D9200576336 /* UnifiedNativeAdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnifiedNativeAdCell.xib; sourceTree = "<group>"; };
 		CFE63B371EAA811300C90BF8 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,8 +80,7 @@
 				846A6C4F1D6E35FD00270B27 /* Info.plist */,
 				846A6C711D6E3A0A00270B27 /* MenuItemViewCell.swift */,
 				846A6C811D760EC000270B27 /* MenuItem.xib */,
-				CFE63B331EAA7FC500C90BF8 /* NativeAppInstallAdCell.xib */,
-				CFE63B341EAA7FC500C90BF8 /* NativeContentAdCell.xib */,
+				AE1BCE981FDF1D9200576336 /* UnifiedNativeAdCell.xib */,
 			);
 			path = NativeAdvancedTableViewExample;
 			sourceTree = "<group>";
@@ -148,13 +145,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				846A6C781D73972000270B27 /* menu_item_image-web.png in Resources */,
-				CFE63B351EAA7FC500C90BF8 /* NativeAppInstallAdCell.xib in Resources */,
 				846A6C821D760EC000270B27 /* MenuItem.xib in Resources */,
+				AE1BCE991FDF1D9200576336 /* UnifiedNativeAdCell.xib in Resources */,
 				846A6C4E1D6E35FD00270B27 /* LaunchScreen.storyboard in Resources */,
 				846A6C491D6E35FD00270B27 /* Main.storyboard in Resources */,
 				843022001DADB82F00614B4A /* menuItemsJSON.json in Resources */,
 				84B6D3661D99A5D5007D12D2 /* GoogleService-Info.plist in Resources */,
-				CFE63B361EAA7FC500C90BF8 /* NativeContentAdCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
