@@ -54,8 +54,8 @@ class ViewController: UIViewController, GADNativeAppInstallAdLoaderDelegate,
     // Prepare the ad loader and start loading ads.
     adLoader = GADAdLoader(adUnitID: adUnitID,
                            rootViewController: self,
-                           adTypes: [kGADAdLoaderAdTypeNativeAppInstall,
-                                     kGADAdLoaderAdTypeNativeContent],
+                           adTypes: [.nativeAppInstall,
+                                     .nativeContent],
                            options: nil)
     adLoader.delegate = self
     preloadNextAd()
