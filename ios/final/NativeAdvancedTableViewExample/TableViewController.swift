@@ -30,10 +30,8 @@ class TableViewController: UITableViewController {
     super.viewDidLoad()
     tableView.register(UINib(nibName: "MenuItem", bundle: nil),
         forCellReuseIdentifier: "MenuItemViewCell")
-    tableView.register(UINib(nibName: "NativeAppInstallAdCell", bundle: nil),
-        forCellReuseIdentifier: "NativeAppInstallAdCell")
-    tableView.register(UINib(nibName: "NativeContentAdCell", bundle: nil),
-        forCellReuseIdentifier: "NativeContentAdCell")
+    tableView.register(UINib(nibName: "UnifiedNativeAdCell", bundle: nil),
+        forCellReuseIdentifier: "UnifiedNativeAdCell")
   }
 
   // MARK: - UITableView delegate methods
@@ -66,65 +64,42 @@ class TableViewController: UITableViewController {
       reusableMenuItemCell.photoView.image = menuItem.photo
 
       return reusableMenuItemCell
-    } else if let nativeAppInstallAd = tableViewItems[indexPath.row] as? GADNativeAppInstallAd {
-      /// Set the native ad's rootViewController to the current view controller.
-      nativeAppInstallAd.rootViewController = self
-
-      let nativeAppInstallAdCell = tableView.dequeueReusableCell(
-          withIdentifier: "NativeAppInstallAdCell", for: indexPath)
-
-      // Get the app install ad view from the Cell. The view hierarchy for this cell is defined in
-      // NativeAppInstallAdCell.xib.
-      let appInstallAdView = nativeAppInstallAdCell.subviews[0].subviews[0]
-          as! GADNativeAppInstallAdView
-
-      // Associate the app install ad view with the app install ad object.
-      // This is required to make the ad clickable.
-      appInstallAdView.nativeAppInstallAd = nativeAppInstallAd
-
-      // Populate the app install ad view with the app install ad assets.
-      (appInstallAdView.headlineView as! UILabel).text = nativeAppInstallAd.headline
-      (appInstallAdView.priceView as! UILabel).text = nativeAppInstallAd.price
-      (appInstallAdView.starRatingView as! UILabel).text =
-          nativeAppInstallAd.starRating!.description + "\u{2605}"
-      (appInstallAdView.bodyView as! UILabel).text = nativeAppInstallAd.body
-      // The SDK automatically turns off user interaction for assets that are part of the ad, but
-      // it is still good to be explicit.
-      (appInstallAdView.callToActionView as! UIButton).isUserInteractionEnabled = false
-      (appInstallAdView.callToActionView as! UIButton).setTitle(
-          nativeAppInstallAd.callToAction, for: UIControlState.normal)
-
-      return nativeAppInstallAdCell
     } else {
-      let nativeContentAd = tableViewItems[indexPath.row] as! GADNativeContentAd
-
+      let nativeAd = tableViewItems[indexPath.row] as! GADUnifiedNativeAd
       /// Set the native ad's rootViewController to the current view controller.
-      nativeContentAd.rootViewController = self
+      nativeAd.rootViewController = self
 
-      let nativeContentAdCell = tableView.dequeueReusableCell(
-          withIdentifier: "NativeContentAdCell", for: indexPath)
+      let nativeAdCell = tableView.dequeueReusableCell(
+          withIdentifier: "UnifiedNativeAdCell", for: indexPath)
 
-      // Get the content ad view from the Cell. The view hierarchy for this cell is defined in
-      // NativeContentAdCell.xib.
-      let contentAdView = nativeContentAdCell.subviews[0].subviews[0]
-        as! GADNativeContentAdView
+      // Get the ad view from the Cell. The view hierarchy for this cell is defined in
+      // UnifiedNativeAdCell.xib.
+      let adView : GADUnifiedNativeAdView = nativeAdCell.contentView.subviews
+        .first as! GADUnifiedNativeAdView
 
-      // Associate the content ad view with the content ad object.
+      // Associate the ad view with the ad object.
       // This is required to make the ad clickable.
-      contentAdView.nativeContentAd = nativeContentAd
+      adView.nativeAd = nativeAd
 
-      // Populate the content ad view with the content ad assets.
-      (contentAdView.headlineView as! UILabel).text = nativeContentAd.headline
-      (contentAdView.bodyView as! UILabel).text = nativeContentAd.body
-      (contentAdView.advertiserView as! UILabel).text = nativeContentAd.advertiser
+      // Populate the ad view with the ad assets.
+      (adView.headlineView as! UILabel).text = nativeAd.headline
+      (adView.priceView as! UILabel).text = nativeAd.price
+      if let starRating = nativeAd.starRating {
+        (adView.starRatingView as! UILabel).text =
+            starRating.description + "\u{2605}"
+      } else {
+        (adView.starRatingView as! UILabel).text = nil
+      }
+      (adView.bodyView as! UILabel).text = nativeAd.body
+      (adView.advertiserView as! UILabel).text = nativeAd.advertiser
       // The SDK automatically turns off user interaction for assets that are part of the ad, but
       // it is still good to be explicit.
-      (contentAdView.callToActionView as! UIButton).isUserInteractionEnabled = false
-      (contentAdView.callToActionView as! UIButton).setTitle(
-          nativeContentAd.callToAction, for: UIControlState.normal)
+      (adView.callToActionView as! UIButton).isUserInteractionEnabled = false
+      (adView.callToActionView as! UIButton).setTitle(
+          nativeAd.callToAction, for: UIControlState.normal)
 
-      return nativeContentAdCell
-    }
+      return nativeAdCell
+    } 
   }
 
 }
