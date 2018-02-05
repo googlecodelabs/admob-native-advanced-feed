@@ -16,7 +16,8 @@
 import Firebase
 import UIKit
 
-class ViewController: UIViewController, GADUnifiedNativeAdLoaderDelegate {
+class ViewController: UIViewController, GADNativeAppInstallAdLoaderDelegate,
+    GADNativeContentAdLoaderDelegate {
 
   // MARK: - Properties
 
@@ -26,14 +27,17 @@ class ViewController: UIViewController, GADUnifiedNativeAdLoaderDelegate {
   /// The ad unit ID from the AdMob UI.
   let adUnitID = "ca-app-pub-3940256099942544/8407707713"
 
-  /// The number of native ads to load (must be less than 5).
+  /// The number of native ads to load.
   let numAdsToLoad = 5
 
   /// The native ads.
-  var nativeAds = [GADUnifiedNativeAd]()
+  var nativeAds = [GADNativeAd]()
 
   /// The ad loader that loads the native ads.
   var adLoader: GADAdLoader!
+
+  /// The number of completed ad loads (success or failures).
+  var numAdLoadCallbacks = 0
 
   /// The spinner view.
   @IBOutlet weak var spinnerView: UIActivityIndicatorView!
@@ -46,16 +50,15 @@ class ViewController: UIViewController, GADUnifiedNativeAdLoaderDelegate {
 
     // Load the menu items.
     addMenuItems()
-    let options = GADMultipleAdsAdLoaderOptions()
-    options.numberOfAds = numAdsToLoad
 
     // Prepare the ad loader and start loading ads.
     adLoader = GADAdLoader(adUnitID: adUnitID,
                            rootViewController: self,
-                           adTypes: [.unifiedNative],
-                           options: [options])
+                           adTypes: [.nativeAppInstall,
+                                     .nativeContent],
+                           options: nil)
     adLoader.delegate = self
-    adLoader.load(GADRequest())
+    preloadNextAd()
   }
 
   @IBAction func showMenu(_ sender: Any) {
@@ -63,6 +66,16 @@ class ViewController: UIViewController, GADUnifiedNativeAdLoaderDelegate {
         as! TableViewController
     tableVC.tableViewItems = tableViewItems
     self.present(tableVC, animated: true, completion: nil)
+  }
+
+  /// Preload native ads sequentially.
+  func preloadNextAd() {
+    if numAdLoadCallbacks < numAdsToLoad {
+      adLoader.load(GADRequest())
+    } else {
+      addNativeAds()
+      enableMenuButton()
+    }
   }
 
   func enableMenuButton() {
@@ -125,18 +138,38 @@ class ViewController: UIViewController, GADUnifiedNativeAdLoaderDelegate {
 
   func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError) {
     print("\(adLoader) failed with error: \(error.localizedDescription)")
+
+    // Increment the number of ad load callbacks.
+    numAdLoadCallbacks += 1
+
+    // Load the next native ad.
+    preloadNextAd()
   }
 
-  func adLoader(_ adLoader: GADAdLoader, didReceive nativeAd: GADUnifiedNativeAd) {
-    print("Received native ad: \(nativeAd)")
+  func adLoader(_ adLoader: GADAdLoader, didReceive nativeAppInstallAd: GADNativeAppInstallAd) {
+    print("Received native app install ad: \(nativeAppInstallAd)")
+
+    // Increment the number of ad load callbacks.
+    numAdLoadCallbacks += 1
 
     // Add the native ad to the list of native ads.
-    nativeAds.append(nativeAd)
+    nativeAds.append(nativeAppInstallAd)
+
+    // Load the next native ad.
+    preloadNextAd()
   }
-  
-  func adLoaderDidFinishLoading(_ adLoader: GADAdLoader) {
-    addNativeAds()
-    enableMenuButton()
+
+  func adLoader(_ adLoader: GADAdLoader, didReceive nativeContentAd: GADNativeContentAd) {
+    print("Received native content ad: \(nativeContentAd)")
+
+    // Increment the number of ad load callbacks.
+    numAdLoadCallbacks += 1
+
+    // Add the native ad to the list of native ads.
+    nativeAds.append(nativeContentAd)
+
+    // Load the next native ad.
+    preloadNextAd()
   }
 
 }
