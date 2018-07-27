@@ -27,7 +27,7 @@ import java.util.List;
 
 public class RecyclerViewFragment extends Fragment {
 
-    // List of Native Express ads and MenuItems that populate the RecyclerView.
+    // List of MenuItems that populate the RecyclerView.
     private List<Object> mRecyclerViewItems;
 
     public RecyclerViewFragment() {
